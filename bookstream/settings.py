@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # Apps
     "accounts",
     "categories",
+    "expenses",
 ]
 
 MIDDLEWARE = [

@@ -1,11 +1,5 @@
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth import get_user_model, authenticate
-from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
 from categories.serializers import (
@@ -35,6 +29,8 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
         IsAuthenticated,
     ]
     lookup_field = "slug"
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["user", "name"]
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
