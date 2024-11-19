@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "djoser",
     # Apps
     "accounts",
+    "categories",
+    "expenses",
 ]
 
 MIDDLEWARE = [
@@ -163,9 +165,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
-    # "DEFAULT_AUTHENTICATION_CLASSES": [
-    #     "rest_framework.authentication.TokenAuthentication",
-    # ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
