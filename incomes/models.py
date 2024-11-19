@@ -7,18 +7,18 @@ from categories.models import Category
 User = get_user_model()
 
 
-class Expense(TimeStampedModel, UniversalIdModel, ReferenceSlugModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expenses")
+class Income(TimeStampedModel, UniversalIdModel, ReferenceSlugModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomes")
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="category_expenses"
+        Category, on_delete=models.CASCADE, related_name="category_incomes"
     )
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
     description = models.TextField(blank=True, null=True)
 
     class Meta:
-        verbose_name = "Expense"
-        verbose_name_plural = "Expenses"
+        verbose_name = "Income"
+        verbose_name_plural = "Incomes"
         ordering = ["-date"]
 
     def __str__(self):
