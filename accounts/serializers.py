@@ -9,6 +9,7 @@ from accounts.validators import (
     validate_password_symbol,
 )
 from business.models import Business
+from business.serializers import BusinessSerializer
 
 User = get_user_model()
 
@@ -30,6 +31,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
         ],
     )
     avatar = serializers.ImageField(use_url=True, required=False)
+    business = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -48,6 +50,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
             "is_accountant",
             "created_at",
             "updated_at",
+            "business",
         )
 
     def create(self, validated_data, role_field=None):
@@ -66,6 +69,11 @@ class BaseUserSerializer(serializers.ModelSerializer):
             return user
         except Exception as e:
             raise serializers.ValidationError(f"User creation failed: {str(e)}")
+
+    def get_business(self, obj):
+        business = obj.business.all()
+        serializers = BusinessSerializer(business, many=True)
+        return serializers.data
 
 
 class UserSerializer(BaseUserSerializer):
