@@ -16,7 +16,8 @@ class ExpenseListCreateView(generics.ListCreateAPIView):
     filterset_fields = ["user", "category"]
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        business = self.request.user.business
+        return self.queryset.filter(business=business)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -33,4 +34,5 @@ class ExpenseDetailView(generics.RetrieveUpdateDestroyAPIView):
     filterset_fields = ["user", "category"]
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        business = self.request.user.business
+        return self.queryset.filter(business=business)

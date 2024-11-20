@@ -8,6 +8,7 @@ from accounts.validators import (
     validate_password_lowercase,
     validate_password_symbol,
 )
+from business.models import Business
 
 User = get_user_model()
 
@@ -61,6 +62,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
             if role_field:
                 setattr(user, role_field, True)
             user.save()
+            Business.objects.create(user=user)
             return user
         except Exception as e:
             raise serializers.ValidationError(f"User creation failed: {str(e)}")

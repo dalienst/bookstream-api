@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from categories.models import Category
 from incomes.models import Income
+from business.models import Business
 
 
 class IncomeSerializer(serializers.ModelSerializer):
@@ -11,6 +12,9 @@ class IncomeSerializer(serializers.ModelSerializer):
     )
     amount = serializers.DecimalField(max_digits=10, decimal_places=2)
     date = serializers.DateField()
+    business = serializers.SlugRelatedField(
+        slug_field="reference", queryset=Business.objects.all()
+    )
 
     class Meta:
         model = Income

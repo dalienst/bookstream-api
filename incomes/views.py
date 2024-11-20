@@ -19,7 +19,8 @@ class IncomeListCreateView(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        business = self.request.user.business
+        return self.queryset.filter(business=business)
 
 
 class IncomeDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -33,4 +34,5 @@ class IncomeDetailView(generics.RetrieveUpdateDestroyAPIView):
     filterset_fields = ["user", "category"]
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        business = self.request.user.business
+        return self.queryset.filter(business=business)

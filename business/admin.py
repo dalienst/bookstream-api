@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from business.models import Business
+
+admin.site.register(Business)
