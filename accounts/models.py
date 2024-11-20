@@ -52,8 +52,8 @@ class User(
     ReferenceSlugModel,
 ):
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=255, blank=True, null=True)
-    last_name = models.CharField(max_length=255, blank=True, null=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     avatar = CloudinaryField("avatars", blank=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -61,7 +61,7 @@ class User(
     is_accountant = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["password"]
+    REQUIRED_FIELDS = ["password", "first_name", "last_name"]
 
     objects = UserManager()
 
