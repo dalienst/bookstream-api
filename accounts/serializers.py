@@ -31,7 +31,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
         ],
     )
     avatar = serializers.ImageField(use_url=True, required=False)
-    business = serializers.SerializerMethodField()
+    business = BusinessSerializer(read_only=True)
 
     class Meta:
         model = User
@@ -69,11 +69,6 @@ class BaseUserSerializer(serializers.ModelSerializer):
             return user
         except Exception as e:
             raise serializers.ValidationError(f"User creation failed: {str(e)}")
-
-    def get_business(self, obj):
-        business = obj.business.all()
-        serializers = BusinessSerializer(business, many=True)
-        return serializers.data
 
 
 class UserSerializer(BaseUserSerializer):
