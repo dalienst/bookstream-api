@@ -10,6 +10,9 @@ from accounts.validators import (
 )
 from business.models import Business
 from business.serializers import BusinessSerializer
+from expenses.serializers import ExpenseSerializer
+from incomes.serializers import IncomeSerializer
+from categories.serializers import CategorySerializer
 
 User = get_user_model()
 
@@ -32,6 +35,9 @@ class BaseUserSerializer(serializers.ModelSerializer):
     )
     avatar = serializers.ImageField(use_url=True, required=False)
     business = BusinessSerializer(read_only=True)
+    expenses = ExpenseSerializer(many=True, read_only=True)
+    incomes = IncomeSerializer(many=True, read_only=True)
+    categories = CategorySerializer(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -51,6 +57,9 @@ class BaseUserSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "business",
+            "expenses",
+            "incomes",
+            "categories",
         )
 
     def create(self, validated_data, role_field=None):
