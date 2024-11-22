@@ -19,6 +19,11 @@ class BusinessSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "logo",
+            "location",
+            "phone",
+            "currency",
+            "fiscal_year",
+            "email",
             "created_at",
             "updated_at",
             "slug",
@@ -29,8 +34,13 @@ class BusinessSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
+        instance.email = validated_data.get("email", instance.email)
         instance.description = validated_data.get("description", instance.description)
         instance.logo = validated_data.get("logo", instance.logo)
+        instance.location = validated_data.get("location", instance.location)
+        instance.phone = validated_data.get("phone", instance.phone)
+        instance.currency = validated_data.get("currency", instance.currency)
+        instance.fiscal_year = validated_data.get("fiscal_year", instance.fiscal_year)
         instance.save()
         return instance
 
