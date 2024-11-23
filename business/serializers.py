@@ -26,6 +26,7 @@ class BusinessSerializer(serializers.ModelSerializer):
             "email",
             "is_compliant",
             "registration_number",
+            "tax_number",
             "vat_number",
             "created_at",
             "updated_at",
@@ -49,6 +50,7 @@ class BusinessSerializer(serializers.ModelSerializer):
             "registration_number", instance.registration_number
         )
         instance.vat_number = validated_data.get("vat_number", instance.vat_number)
+        instance.tax_number = validated_data.get("tax_number", instance.tax_number)
         instance.save()
         return instance
 

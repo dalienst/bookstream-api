@@ -20,6 +20,7 @@ class Business(UniversalIdModel, TimeStampedModel, ReferenceSlugModel):
     vat_number = models.CharField(max_length=255, blank=True, null=True)
     is_compliant = models.BooleanField(default=False)
     email = models.EmailField(max_length=255, blank=True, null=True)
+    tax_number = models.CharField(max_length=25, blank=True, null=True)
 
     class Meta:
         verbose_name = "Business"
