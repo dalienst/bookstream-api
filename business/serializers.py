@@ -24,6 +24,9 @@ class BusinessSerializer(serializers.ModelSerializer):
             "currency",
             "fiscal_year",
             "email",
+            "is_compliant",
+            "registration_number",
+            "vat_number",
             "created_at",
             "updated_at",
             "slug",
@@ -41,6 +44,11 @@ class BusinessSerializer(serializers.ModelSerializer):
         instance.phone = validated_data.get("phone", instance.phone)
         instance.currency = validated_data.get("currency", instance.currency)
         instance.fiscal_year = validated_data.get("fiscal_year", instance.fiscal_year)
+        instance.is_compliant = validated_data.get("is_compliant", instance.is_compliant)
+        instance.registration_number = validated_data.get(
+            "registration_number", instance.registration_number
+        )
+        instance.vat_number = validated_data.get("vat_number", instance.vat_number)
         instance.save()
         return instance
 

@@ -13,9 +13,12 @@ class Business(UniversalIdModel, TimeStampedModel, ReferenceSlugModel):
     description = models.TextField(blank=True, null=True)
     logo = CloudinaryField("logos", blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
-    phone = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
     currency = models.CharField(max_length=255, blank=True, null=True)
     fiscal_year = models.CharField(max_length=255, blank=True, null=True)
+    registration_number = models.CharField(max_length=255, blank=True, null=True)
+    vat_number = models.CharField(max_length=255, blank=True, null=True)
+    is_compliant = models.BooleanField(default=False)
     email = models.EmailField(max_length=255, blank=True, null=True)
 
     class Meta:
